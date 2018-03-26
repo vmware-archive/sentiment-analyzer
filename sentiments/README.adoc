@@ -21,6 +21,7 @@ $ pip install textblob
 ```
 
 Run it against sample tweets
+```
 $ ./sentiments.py < tweets.txt
 ```
 
