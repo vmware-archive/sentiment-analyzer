@@ -1,0 +1,57 @@
+= sentiments
+
+[horizontal]
+*Language*:: Python
+*Function*:: link:sentiments.py[sentiments.py]
+*Protocol*:: grpc
+*Input*:: tweets
+
+=== about
+
+This function performs sentiment analysis using the http://textblob.readthedocs.io/en/dev/[textblob] natural language processing package.
+It is intendended to work with a twitter feed, rendered as json. The analyzer only looks at the `text` field, so any valid json containing 
+`text` will work. The output includes the text along with a computed polarity indicating the sentiment. The value ranges from -1.0 to 1.0, where 
+0.0 is neutral, and values reflect the degree positive or negative sentiment accordingly. 
+
+To run this as a riff function, follow the instructions below.  
+
+To test it standalone, install python 3.6, pip and 
+```
+$ pip install textblob
+```
+
+Run it against sample tweets
+$ ./sentiments.py < tweets.txt
+```
+
+or manually input json from the command line 
+
+```
+$./sentiments.py
+{"text":"happy happy happy"}
+```
+
+=== prerequisites
+
+1. riff is deployed
+2. the `riff` CLI is on your PATH
+3. the working directory is `samples/python/sentiments`
+
+=== create the function and its input topic
+
+```
+riff create python --input tweets --handler process
+```
+
+=== publish a message and wait for a reply
+
+```
+riff publish --input tweets --data '{"text":"happy happy happy"}' --reply
+riff publish --input tweets --data '{"text":"sad sad sad"}' --reply
+```
+
+=== delete the function and its input topic
+
+```
+riff delete --all
+```

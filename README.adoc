@@ -1,0 +1,50 @@
+== Sentiment Analyzer Sample
+=== What is this?
+
+This sample demonstrates a link:twitter-source/README.adoc[twitter-source], implemented as a Java function that streams tweets to a text link:sentiments/README.adoc[sentiment analyzer] 
+written in Python. 
+
+=== prerequisites
+
+1. riff is deployed
+2. the `riff` CLI is on your PATH
+
+=== Running the sample
+
+The twitter-source function publishes a twitter stream to the `tweets` topic. The 
+sentiments function publishes to the `sentiments` topic.
+
+* Follow the instructions for link:twitter-source/README.adoc[twitter-source] function  
+* Follow the instructions for the link:sentiments/README.adoc[sentiments] function
+
+```
+$ riff publish -i twitter-source -d start
+```
+This starts the twitter-source function which triggers the sentiments function. You should 
+see both function containers running with 
+```
+$ kubectl get pods
+```
+
+To see the contents of the `sentiments` topic:
+
+```
+$ curl https://raw.githubusercontent.com/projectriff/riff/master/topics | bash -s tail -n sentiments
+```
+
+To stop the twitter source
+```
+$ riff publish -i twitter-source -d stop
+```
+
+[NOTE]
+Once the source is stopped it cannot be restarted. Since it is configured with a long timeout, to 
+re-run the sample
+
+To re-run the sample: 
+```
+$ riff delete -n twitter-source
+$ riff apply twitter-source
+```
+
+

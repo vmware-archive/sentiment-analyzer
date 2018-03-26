@@ -1,0 +1,11 @@
+apiVersion: projectriff.io/v1
+kind: Function
+metadata:
+  name: sentiments
+spec:
+  protocol: grpc
+  input: tweets 
+  output: sentiments
+
+  container:
+    image: dturanski/sentiments:0.0.1
