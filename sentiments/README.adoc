@@ -38,21 +38,24 @@ $./sentiments.py
 2. the `riff` CLI is on your PATH
 3. the working directory is `samples/python/sentiments`
 
-=== create the function and its input topic
+=== create the function and its topics
+
+If you are running the end-to-end streaming demo: 
 
 ```
-riff create python --input tweets --handler process
+$ riff create python --input tweets --output sentiments --handler process
 ```
 
-=== publish a message and wait for a reply
+To demonstrate this individually: 
 
 ```
-riff publish --input tweets --data '{"text":"happy happy happy"}' --reply
-riff publish --input tweets --data '{"text":"sad sad sad"}' --reply
+$ riff create python --input tweets --handler process
+$ riff publish --input tweets --data '{"text":"happy happy happy"}' --reply
+$ riff publish --input tweets --data '{"text":"sad sad sad"}' --reply
 ```
 
 === delete the function and its input topic
 
 ```
-riff delete --all
+$ riff delete --all
 ```
