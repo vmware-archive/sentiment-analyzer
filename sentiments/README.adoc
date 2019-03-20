@@ -8,7 +8,7 @@
 
 === about
 
-This function performs sentiment analysis using the http://textblob.readthedocs.io/en/dev/[textblob] natural language processing package.
+This function performs sentiment analysis using the https://textblob.readthedocs.io/en/dev/[textblob] natural language processing package.
 It is intendended to work with a twitter feed, rendered as json. The analyzer only looks at the `text` field, so any valid json containing 
 `text` will work. The output includes the text along with a computed polarity indicating the sentiment. The value ranges from -1.0 to 1.0, where 
 0.0 is neutral, and values reflect the degree positive or negative sentiment accordingly. 
